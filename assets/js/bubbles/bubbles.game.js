@@ -272,6 +272,7 @@
       el.innerHTML = `<div class="txt">${escapeHtml(item.text)}</div>`;
       el.addEventListener("click", () => onBubbleClick(ui, item, el));
       arena.appendChild(el);
+      animateBubbleIn(el, c.scale);
     });
 
     return true;
@@ -285,9 +286,8 @@
 
     if(isCorrect){
       el.classList.add("good");
-      el.style.opacity = "0";
       el.style.pointerEvents = "none";
-      setTimeout(() => el.remove(), 110);
+      animateBubbleOut(el);
 
       state.nextIndex++;
       const remaining = state.targets.length - state.nextIndex;
@@ -299,6 +299,7 @@
       }
     } else {
       el.classList.add("bad");
+      animateBubbleError(el);
       endGame(ui, false, t("game.wrongTitle"), t("game.wrongMsg", { expected: expected?.text ?? t("game.dash") }));
     }
   }
@@ -396,6 +397,46 @@
       .replaceAll(">", "&gt;")
       .replaceAll('"', "&quot;")
       .replaceAll("'", "&#039;");
+  }
+
+  function animateBubbleIn(el, scale){
+    const to = `translate(-50%, -50%) scale(${scale})`;
+    const from = `translate(-50%, -50%) scale(${Math.max(0.45, scale * 0.72)})`;
+    el.animate(
+      [
+        { transform: from, opacity: 0 },
+        { transform: to, opacity: 1 }
+      ],
+      { duration: 220, easing: "cubic-bezier(.2,.9,.25,1)", fill: "none" }
+    );
+  }
+
+  function animateBubbleOut(el){
+    const base = el.style.transform || "translate(-50%, -50%) scale(1)";
+    const match = /scale\(([^)]+)\)/.exec(base);
+    const scale = Number(match?.[1] ?? 1);
+    const to = `translate(-50%, -50%) scale(${Math.max(0.18, scale * 0.35)})`;
+    const anim = el.animate(
+      [
+        { transform: base, opacity: 1 },
+        { transform: to, opacity: 0 }
+      ],
+      { duration: 140, easing: "ease-out", fill: "forwards" }
+    );
+    anim.onfinish = () => el.remove();
+  }
+
+  function animateBubbleError(el){
+    const base = el.style.transform || "translate(-50%, -50%) scale(1)";
+    el.animate(
+      [
+        { transform: base },
+        { transform: `${base} translateX(-5px)` },
+        { transform: `${base} translateX(5px)` },
+        { transform: base }
+      ],
+      { duration: 180, easing: "ease-in-out", fill: "none" }
+    );
   }
 
   document.addEventListener("DOMContentLoaded", init);
