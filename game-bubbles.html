@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Burbujas en orden</title>
+  <title data-i18n="game.pageTitle">Burbujas en orden</title>
   <link rel="stylesheet" href="assets/css/base.css" />
   <link rel="stylesheet" href="assets/css/bubbles.css" />
 </head>
@@ -11,10 +11,20 @@
   <header class="topbar">
     <div class="row" style="justify-content: space-between;">
       <div>
-        <h1>🫧 Burbujas en orden</h1>
-        <p class="subtitle">Pulsa en el orden correcto. Si fallas, termina la partida.</p>
+        <h1 data-i18n="game.title">Burbujas en orden</h1>
+        <p class="subtitle" data-i18n="game.subtitle">Pulsa en el orden correcto. Si fallas, termina la partida.</p>
       </div>
-      <a class="btn" href="index.html">← Inicio</a>
+      <div class="row">
+        <div class="field" style="max-width: 170px;">
+          <label for="langSelect" data-i18n="common.language">Idioma</label>
+          <select id="langSelect">
+            <option value="es" data-i18n="common.languages.es">Castellano</option>
+            <option value="ca" data-i18n="common.languages.ca">Catalan</option>
+            <option value="en" data-i18n="common.languages.en">English</option>
+          </select>
+        </div>
+        <a class="btn" href="index.html" data-i18n="game.home">Inicio</a>
+      </div>
     </div>
   </header>
 
@@ -23,30 +33,30 @@
       <div class="config-inner">
         <div class="row">
           <div class="field">
-            <label for="mode">Tipo</label>
+            <label for="mode" data-i18n="game.mode">Tipo</label>
             <select id="mode">
-              <option value="numbers">Números</option>
-              <option value="operations">Operaciones</option>
-              <option value="tables">Tablas de multiplicar</option>
+              <option value="numbers" data-i18n="game.modeNumbers">Numeros</option>
+              <option value="operations" data-i18n="game.modeOperations">Operaciones</option>
+              <option value="tables" data-i18n="game.modeTables">Tablas de multiplicar</option>
             </select>
           </div>
 
           <div class="field">
-            <label for="order">Orden</label>
+            <label for="order" data-i18n="game.order">Orden</label>
             <select id="order">
-              <option value="asc">Ascendente</option>
-              <option value="desc">Descendente</option>
+              <option value="asc" data-i18n="game.orderAsc">Ascendente</option>
+              <option value="desc" data-i18n="game.orderDesc">Descendente</option>
             </select>
           </div>
 
           <div class="field">
-            <label for="bubbleCount">Nº burbujas</label>
+            <label for="bubbleCount" data-i18n="game.bubbleCount">N. burbujas</label>
             <input id="bubbleCount" type="range" min="5" max="20" value="10" />
             <div class="hint"><span id="bubbleCountVal">10</span></div>
           </div>
 
           <div class="field">
-            <label for="timeLimit">Tiempo</label>
+            <label for="timeLimit" data-i18n="game.time">Tiempo</label>
             <input id="timeLimit" type="range" min="0" max="65" value="30" />
             <div class="hint"><span id="timeLimitVal">30s</span></div>
           </div>
@@ -58,13 +68,13 @@
 
         <div class="row" style="justify-content: space-between; margin-top: 10px;">
           <div class="row">
-            <span class="badge"><span class="dot dot-accent"></span>Optimizado para móvil</span>
-            <span class="badge"><span class="dot dot-ok"></span>Sin servidor</span>
+            <span class="badge"><span class="dot dot-accent"></span><span data-i18n="game.mobileBadge">Optimizado para movil</span></span>
+            <span class="badge"><span class="dot dot-ok"></span><span data-i18n="game.serverlessBadge">Sin servidor</span></span>
           </div>
 
           <div class="row">
-            <button id="btnStart" class="btn btn-primary">Empezar</button>
-            <button id="btnReset" class="btn">Reiniciar</button>
+            <button id="btnStart" class="btn btn-primary" data-i18n="game.start">Empezar</button>
+            <button id="btnReset" class="btn" data-i18n="game.reset">Reiniciar</button>
           </div>
         </div>
       </div>
@@ -74,17 +84,17 @@
       <div class="hud-inner">
         <div class="row" style="justify-content: space-between;">
           <div class="row">
-            <div class="kv"><span class="k">Objetivo:</span> <span id="goalText" class="v">—</span></div>
-            <div class="kv"><span class="k">Siguiente:</span> <span id="nextText" class="v">—</span></div>
+            <div class="kv"><span class="k" data-i18n="game.goal">Objetivo:</span> <span id="goalText" class="v">-</span></div>
+            <div class="kv"><span class="k" data-i18n="game.next">Siguiente:</span> <span id="nextText" class="v">-</span></div>
           </div>
 
           <div class="row">
-            <div class="kv"><span class="k">Restantes:</span> <span id="remainingText" class="v">—</span></div>
-            <div class="kv"><span class="k">Estado:</span> <span id="statusText" class="v">Listo</span></div>
+            <div class="kv"><span class="k" data-i18n="game.remaining">Restantes:</span> <span id="remainingText" class="v">-</span></div>
+            <div class="kv"><span class="k" data-i18n="game.status">Estado:</span> <span id="statusText" class="v" data-i18n="game.statusReady">Listo</span></div>
           </div>
         </div>
 
-        <div class="timebar" aria-label="Tiempo restante">
+        <div class="timebar" aria-label="Tiempo restante" data-i18n="game.timebarAria" data-i18n-attr="aria-label">
           <div id="timebarFill" class="timebar-fill"></div>
         </div>
       </div>
@@ -92,24 +102,28 @@
 
     <section class="panel arena-wrap" style="margin-top: 12px;">
       <div class="arena-top row" style="justify-content: space-between;">
-        <div class="badge"><span class="dot dot-muted"></span>Consejo: usa el pulgar, las burbujas son grandes.</div>
-        <button id="btnPause" class="btn">Pausar</button>
+        <div class="badge"><span class="dot dot-muted"></span><span data-i18n="game.tip">Consejo: usa el pulgar, las burbujas son grandes.</span></div>
+        <button id="btnPause" class="btn" data-i18n="game.pause">Pausar</button>
       </div>
-      <div id="arena" class="arena" role="application" aria-label="Zona de juego"></div>
+      <div id="arena" class="arena" role="application" aria-label="Zona de juego" data-i18n="game.arenaAria" data-i18n-attr="aria-label"></div>
     </section>
 
     <section id="overlay" class="overlay hidden" aria-hidden="true">
       <div class="overlay-card">
-        <div id="overlayTitle" class="overlay-title">—</div>
-        <div id="overlayMsg" class="overlay-msg">—</div>
+        <div id="overlayTitle" class="overlay-title">-</div>
+        <div id="overlayMsg" class="overlay-msg">-</div>
         <div class="row" style="justify-content:center; margin-top: 12px;">
-          <button id="btnPlayAgain" class="btn btn-primary">Jugar otra vez</button>
-          <a class="btn" href="index.html">Volver al inicio</a>
+          <button id="btnPlayAgain" class="btn btn-primary" data-i18n="game.playAgain">Jugar otra vez</button>
+          <a class="btn" href="index.html" data-i18n="common.backHome">Volver al inicio</a>
         </div>
       </div>
     </section>
   </main>
 
+  <script src="assets/js/i18n/es.js"></script>
+  <script src="assets/js/i18n/ca.js"></script>
+  <script src="assets/js/i18n/en.js"></script>
+  <script src="assets/js/i18n/i18n.js"></script>
   <script src="assets/js/bubbles/bubbles.config.js"></script>
   <script src="assets/js/bubbles/bubbles.utils.js"></script>
   <script src="assets/js/bubbles/bubbles.ui.js"></script>

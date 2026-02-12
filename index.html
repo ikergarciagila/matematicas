@@ -3,32 +3,48 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Juego de Matemáticas</title>
+  <title data-i18n="home.pageTitle">Juego de Matematicas</title>
   <link rel="stylesheet" href="assets/css/base.css" />
   <link rel="stylesheet" href="assets/css/home.css" />
 </head>
 <body>
   <header class="topbar">
-    <h1>Juego de Matemáticas</h1>
-    <p class="subtitle">Minijuegos para niños y preadolescentes</p>
+    <div class="row" style="justify-content: space-between;">
+      <div>
+        <h1 data-i18n="home.title">Juego de Matematicas</h1>
+        <p class="subtitle" data-i18n="home.subtitle">Minijuegos para ninos y preadolescentes</p>
+      </div>
+      <div class="field" style="max-width: 180px;">
+        <label for="langSelect" data-i18n="common.language">Idioma</label>
+        <select id="langSelect">
+          <option value="es" data-i18n="common.languages.es">Castellano</option>
+          <option value="ca" data-i18n="common.languages.ca">Catalan</option>
+          <option value="en" data-i18n="common.languages.en">English</option>
+        </select>
+      </div>
+    </div>
   </header>
 
   <main class="container">
     <section class="grid">
-      <a class="card" href="game-bubbles.html" aria-label="Jugar a Burbujas en orden">
-        <div class="card-title">🫧 Burbujas en orden</div>
+      <a class="card" href="game-bubbles.html" aria-label="Jugar a Burbujas en orden" data-i18n="home.playBubblesAria" data-i18n-attr="aria-label">
+        <div class="card-title" data-i18n="home.bubblesTitle">Burbujas en orden</div>
         <div class="card-desc">
-          Pulsa las burbujas en el orden correcto antes de que se acabe el tiempo.
+          <span data-i18n="home.bubblesDesc">Pulsa las burbujas en el orden correcto antes de que se acabe el tiempo.</span>
         </div>
       </a>
 
       <div class="card card-disabled" aria-disabled="true">
-        <div class="card-title">🧩 Próximamente</div>
-        <div class="card-desc">Más minijuegos aquí.</div>
+        <div class="card-title" data-i18n="home.soonTitle">Proximamente</div>
+        <div class="card-desc" data-i18n="home.soonDesc">Mas minijuegos aqui.</div>
       </div>
     </section>
   </main>
 
+  <script src="assets/js/i18n/es.js"></script>
+  <script src="assets/js/i18n/ca.js"></script>
+  <script src="assets/js/i18n/en.js"></script>
+  <script src="assets/js/i18n/i18n.js"></script>
   <script src="assets/js/app-home.js"></script>
 </body>
 </html>
