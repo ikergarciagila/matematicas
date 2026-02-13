@@ -67,6 +67,7 @@ window.APP_I18N.en = {
     statusVictory: "Victory",
     statusEnd: "End",
     pauseResume: "Resume",
+    pauseOverlayMsg: "Press Resume to continue.",
     overlayNoFitTitle: "No space",
     overlayNoFitMsg: "I could not place all bubbles without overlap. Try fewer bubbles or rotate the device.",
     winTitle: "Nice",

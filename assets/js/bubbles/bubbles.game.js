@@ -97,10 +97,11 @@
     state.targets = [];
     state.nextIndex = 0;
     state.tableN = null;
-    ui.arena.innerHTML = "";
+    clearBubbles(ui);
     updateHUD(ui, t("game.statusReady"));
     setTimebar(ui, 1);
     hideOverlay(ui);
+    setPauseCover(ui, false);
     ui.btnPause.textContent = t("game.pause");
   }
 
@@ -127,7 +128,6 @@
     ui.goalText.textContent = goalTextForMode(opts, state);
     ui.remainingText.textContent = String(state.targets.length);
     ui.statusText.textContent = t("game.statusPlaying");
-    ui.nextText.textContent = state.targets[0]?.text ?? t("game.dash");
 
     state.running = true;
     state.paused = false;
@@ -135,6 +135,7 @@
     state.startTs = performance.now();
     state.pauseAccumMs = 0;
     ui.btnPause.textContent = t("game.pause");
+    setPauseCover(ui, false);
 
     loop(ui);
   }
@@ -245,7 +246,7 @@
 
   function renderAndPlace(ui, items){
     const arena = ui.arena;
-    arena.innerHTML = "";
+    clearBubbles(ui);
 
     const arenaRect = arena.getBoundingClientRect();
     const bubbleSize = U.measureBubblePx(arena);
@@ -292,7 +293,6 @@
       state.nextIndex++;
       const remaining = state.targets.length - state.nextIndex;
       ui.remainingText.textContent = String(remaining);
-      ui.nextText.textContent = state.targets[state.nextIndex]?.text ?? t("game.dash");
 
       if(remaining <= 0){
         endGame(ui, true, t("game.winTitle"), t("game.winMsg"));
@@ -350,11 +350,13 @@
       state.pauseStartTs = performance.now();
       ui.btnPause.textContent = t("game.pauseResume");
       ui.statusText.textContent = t("game.statusPaused");
+      setPauseCover(ui, true);
     } else {
       const now = performance.now();
       state.pauseAccumMs += (now - state.pauseStartTs);
       ui.btnPause.textContent = t("game.pause");
       ui.statusText.textContent = t("game.statusPlaying");
+      setPauseCover(ui, false);
     }
   }
 
@@ -362,13 +364,13 @@
     state.ended = true;
     state.running = false;
     ui.statusText.textContent = win ? t("game.statusVictory") : t("game.statusEnd");
+    setPauseCover(ui, false);
     showOverlay(ui, title, msg);
     stopLoop();
   }
 
   function updateHUD(ui, status){
     ui.goalText.textContent = t("game.dash");
-    ui.nextText.textContent = t("game.dash");
     ui.remainingText.textContent = t("game.dash");
     ui.statusText.textContent = status;
   }
@@ -388,6 +390,15 @@
   function hideOverlay(ui){
     ui.overlay.classList.add("hidden");
     ui.overlay.setAttribute("aria-hidden", "true");
+  }
+
+  function clearBubbles(ui){
+    ui.arena.querySelectorAll(".bubble").forEach((el) => el.remove());
+  }
+
+  function setPauseCover(ui, visible){
+    if(!ui.pauseCover) return;
+    ui.pauseCover.classList.toggle("hidden", !visible);
   }
 
   function escapeHtml(s){

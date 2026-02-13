@@ -9,13 +9,13 @@
 </head>
 <body>
   <header class="topbar">
-    <div class="row" style="justify-content: space-between;">
+    <div class="row topbar-row" style="justify-content: space-between;">
       <div>
         <h1 data-i18n="game.title">Burbujas en orden</h1>
         <p class="subtitle" data-i18n="game.subtitle">Pulsa en el orden correcto. Si fallas, termina la partida.</p>
       </div>
-      <div class="row">
-        <div class="field" style="max-width: 170px;">
+      <div class="row topbar-actions">
+        <div class="field field-compact">
           <label for="langSelect" data-i18n="common.language">Idioma</label>
           <select id="langSelect">
             <option value="es" data-i18n="common.languages.es">Castellano</option>
@@ -85,7 +85,6 @@
         <div class="row" style="justify-content: space-between;">
           <div class="row">
             <div class="kv"><span class="k" data-i18n="game.goal">Objetivo:</span> <span id="goalText" class="v">-</span></div>
-            <div class="kv"><span class="k" data-i18n="game.next">Siguiente:</span> <span id="nextText" class="v">-</span></div>
           </div>
 
           <div class="row">
@@ -105,7 +104,14 @@
         <div class="badge"><span class="dot dot-muted"></span><span data-i18n="game.tip">Consejo: usa el pulgar, las burbujas son grandes.</span></div>
         <button id="btnPause" class="btn" data-i18n="game.pause">Pausar</button>
       </div>
-      <div id="arena" class="arena" role="application" aria-label="Zona de juego" data-i18n="game.arenaAria" data-i18n-attr="aria-label"></div>
+      <div id="arena" class="arena" role="application" aria-label="Zona de juego" data-i18n="game.arenaAria" data-i18n-attr="aria-label">
+        <div id="pauseCover" class="arena-pause hidden">
+          <div class="arena-pause-card">
+            <div class="arena-pause-title" data-i18n="game.statusPaused">Pausado</div>
+            <div class="arena-pause-msg" data-i18n="game.pauseOverlayMsg">Pulsa Reanudar para continuar.</div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="overlay" class="overlay hidden" aria-hidden="true">

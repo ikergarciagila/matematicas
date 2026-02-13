@@ -67,6 +67,7 @@ window.APP_I18N.es = {
     statusVictory: "Victoria",
     statusEnd: "Fin",
     pauseResume: "Reanudar",
+    pauseOverlayMsg: "Pulsa Reanudar para continuar.",
     overlayNoFitTitle: "No caben",
     overlayNoFitMsg: "No he conseguido colocar las burbujas sin solaparse. Prueba con menos burbujas o gira el dispositivo.",
     winTitle: "Bien",

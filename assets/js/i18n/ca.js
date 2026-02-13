@@ -67,6 +67,7 @@ window.APP_I18N.ca = {
     statusVictory: "Victoria",
     statusEnd: "Fi",
     pauseResume: "Reprendre",
+    pauseOverlayMsg: "Prem Reprendre per continuar.",
     overlayNoFitTitle: "No hi caben",
     overlayNoFitMsg: "No he pogut colocar les bombolles sense encavalcar-se. Prova amb menys bombolles o gira el dispositiu.",
     winTitle: "Be",

@@ -93,10 +93,10 @@
 
       arena: $("#arena"),
       goalText: $("#goalText"),
-      nextText: $("#nextText"),
       remainingText: $("#remainingText"),
       statusText: $("#statusText"),
       timebarFill: $("#timebarFill"),
+      pauseCover: $("#pauseCover"),
 
       overlay: $("#overlay"),
       overlayTitle: $("#overlayTitle"),
